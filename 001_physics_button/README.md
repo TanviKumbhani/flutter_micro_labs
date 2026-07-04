@@ -6,6 +6,14 @@ Instead of behaving like a static UI element, the button reacts to touch with re
 
 ---
 
+## 🎥 Preview
+
+<p align="center">
+  <img src="assets/physics_button.gif" alt="Physics Button Preview" width="320"/>
+</p>
+
+---
+
 
 ## ✨ Features
 
