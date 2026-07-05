@@ -9,7 +9,7 @@ This micro lab explores how blur, gradients, reflections, shadows, and subtle fl
 ## 📱 Preview
 
 <p align="center">
-  <img src="assets/glass-weather-card.mp4" width="340" alt="Glass Weather Card Preview"/>
+  <img src="assets/glass_weather_card.gif" width="340" alt="Glass Weather Card Preview"/>
 </p>
 
 ---
