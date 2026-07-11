@@ -9,12 +9,12 @@
         "packageRef" : {
           "identity" : "flutterframework",
           "kind" : "fileSystem",
-          "location" : "/Users/tanvikumbhani/StudioProjects/flutter_micro_lab/ios/Flutter/ephemeral/Packages/.packages/FlutterFramework",
+          "location" : "/Users/tanvikumbhani/StudioProjects/Git/flutter_micro_labs/003_floating_orb/ios/Flutter/ephemeral/Packages/.packages/FlutterFramework",
           "name" : "FlutterFramework"
         },
         "state" : {
           "name" : "fileSystem",
-          "path" : "/Users/tanvikumbhani/StudioProjects/flutter_micro_lab/ios/Flutter/ephemeral/Packages/.packages/FlutterFramework"
+          "path" : "/Users/tanvikumbhani/StudioProjects/Git/flutter_micro_labs/003_floating_orb/ios/Flutter/ephemeral/Packages/.packages/FlutterFramework"
         },
         "subpath" : "flutterframework"
       }

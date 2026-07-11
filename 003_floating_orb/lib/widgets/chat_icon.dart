@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -18,9 +19,7 @@ class ChatIcon extends StatefulWidget {
 class _ChatIconState extends State<ChatIcon>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
-
-  late final Animation<double> _glow;
-  late final Animation<double> _scale;
+  late final Animation<double> _rotation;
 
   @override
   void initState() {
@@ -28,26 +27,42 @@ class _ChatIconState extends State<ChatIcon>
 
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 700),
+      duration: const Duration(milliseconds: 450),
     );
 
-    _glow = Tween<double>(
-      begin: 0,
-      end: 1,
-    ).animate(
+    _rotation = TweenSequence<double>([
+      TweenSequenceItem(
+        tween: Tween(
+          begin: 0.0,
+          end: -0.17, // -10°
+        ),
+        weight: 25,
+      ),
+      TweenSequenceItem(
+        tween: Tween(
+          begin: -0.17,
+          end: 0.17, // +10°
+        ),
+        weight: 35,
+      ),
+      TweenSequenceItem(
+        tween: Tween(
+          begin: 0.17,
+          end: -0.10, // -6°
+        ),
+        weight: 20,
+      ),
+      TweenSequenceItem(
+        tween: Tween(
+          begin: -0.10,
+          end: 0.0,
+        ),
+        weight: 20,
+      ),
+    ]).animate(
       CurvedAnimation(
         parent: _controller,
         curve: Curves.easeOut,
-      ),
-    );
-
-    _scale = Tween<double>(
-      begin: 1,
-      end: 1.08,
-    ).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: Curves.easeOutBack,
       ),
     );
 
@@ -58,7 +73,7 @@ class _ChatIconState extends State<ChatIcon>
     while (mounted) {
       await Future.delayed(const Duration(seconds: 2));
 
-      if (!mounted) break;
+      if (!mounted) return;
 
       await _controller.forward();
       await _controller.reverse();
@@ -74,36 +89,16 @@ class _ChatIconState extends State<ChatIcon>
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-      animation: _controller,
+      animation: _rotation,
       builder: (_, __) {
-        return Transform.scale(
-          scale: _scale.value,
-          child: Container(
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.white.withOpacity(
-                    0.45 * _glow.value,
-                  ),
-                  blurRadius: 12 * _glow.value,
-                  spreadRadius: 2 * _glow.value,
-                ),
-              ],
-            ),
-            child: SvgPicture.asset(
-              widget.asset,
-              width: 32,
-              height: 32,
-              fit: BoxFit.contain,
-              colorFilter: ColorFilter.mode(
-                Color.lerp(
-                  Colors.white,
-                  const Color(0xffB8F4FF),
-                  _glow.value,
-                )!,
-                BlendMode.srcIn,
-              ),
-            ),
+        return Transform.rotate(
+          angle: _rotation.value,
+          alignment: Alignment.center,
+          child: SvgPicture.asset(
+            widget.asset,
+            width: 32,
+            height: 32,
+            fit: BoxFit.contain,
           ),
         );
       },
